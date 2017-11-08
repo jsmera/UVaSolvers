@@ -1,0 +1,12 @@
+6 4
+engine
+brakes
+tires
+ashtray
+vinyl roof
+trip computer
+Chevrolet
+Cadillac
+Hyundai
+Lada
+0 0
