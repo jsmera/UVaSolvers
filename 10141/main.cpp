@@ -1,4 +1,6 @@
-#include <cstdio>
+#include <stdio.h>
+#include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -13,31 +15,40 @@ int main () {
 
     int temp = n_RFP;
     while(temp--) {
-      char name_requi[80];
-      scanf("%[^\n]%*c", name_requi);
+      string name_requi;
+      getline(cin, name_requi);
     }
     
-    char* win;
-    double win_r = -1, win_budget;
+    string win;
+    int win_r = -1;
+    double win_budget;
     for (int i = 0; i < P; i++) {
-      char agency_name[80], ign[80];
+      string agency_name, ign;
       int agency_r;
       double budget;
-      gets(agency_name);
+      getline(cin, agency_name);
       scanf("%lf %d\n", &budget, &agency_r);
-      
-      if (win_r < agency_r && agency_r <= n_RFP) {
-        printf("%s %d %d\n", agency_name, agency_r, n_RFP);
+
+      if (agency_r > win_r) {
         win = agency_name;
         win_budget = budget;
         win_r = agency_r;
+      } else if(agency_r == win_r) {
+        if (budget < win_budget) {
+          win = agency_name;
+          win_budget = budget;
+          win_r = agency_r;
+        }
       }
 
       for (int i = 0; i < agency_r; i++) {
-        gets(ign);
+        getline(cin, ign);
       }
     }
-    printf("RFP #%d: %s\n", n_case, win);
+    if (n_case > 1)
+      printf("\nRFP #%d\n%s\n", n_case, win.c_str());
+    else
+      printf("RFP #%d\n%s\n", n_case, win.c_str());
   }
   return 0;
 }
