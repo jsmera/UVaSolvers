@@ -29,6 +29,7 @@ int main () {
         gets(ign);
       }
       if (win_r < agency_r && agency_r <= n_RFP) {
+        printf("%s %d %d\n", agency_name, agency_r, n_RFP);
         win = agency_name;
         win_budget = budget;
         win_r = agency_r;
