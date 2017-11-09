@@ -25,14 +25,16 @@ int main () {
       double budget;
       gets(agency_name);
       scanf("%lf %d\n", &budget, &agency_r);
-      for (int i = 0; i < agency_r; i++) {
-        gets(ign);
-      }
+      
       if (win_r < agency_r && agency_r <= n_RFP) {
         printf("%s %d %d\n", agency_name, agency_r, n_RFP);
         win = agency_name;
         win_budget = budget;
         win_r = agency_r;
+      }
+
+      for (int i = 0; i < agency_r; i++) {
+        gets(ign);
       }
     }
     printf("RFP #%d: %s\n", n_case, win);
