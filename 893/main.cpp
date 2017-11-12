@@ -15,7 +15,6 @@ int main() {
 
     int res_day = day, res_month = month, res_year = year;
     while(days_after > 0) {
-      //printf("Dia: %d Mes: %d Año: %d Bisiesto: %d Dias restantes: %d\n", res_day, res_month, res_year, isLeapYears(res_year), days_after);
       if (res_day+days_after <= days[res_month]) {
         res_day+=days_after;
         days_after = 0;
