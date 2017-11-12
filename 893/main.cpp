@@ -14,39 +14,29 @@ int main() {
     }
 
     int res_day = day, res_month = month, res_year = year;
-    while(days_after) {
-      printf("Dia: %d Mes: %d Año: %d Bisiesto: %d Dias restantes: %d\n", res_day, res_month, res_year, isLeapYears(res_year), days_after);
-      if (res_day+days_after < days[res_month]) {
+    while(days_after > 0) {
+      //printf("Dia: %d Mes: %d Año: %d Bisiesto: %d Dias restantes: %d\n", res_day, res_month, res_year, isLeapYears(res_year), days_after);
+      if (res_day+days_after <= days[res_month]) {
         res_day+=days_after;
-        days_after-=days_after;
+        days_after = 0;
       } else {
-        if (res_day == days[res_month] && days_after > 0) {
+        if (res_day == days[res_month]) {
           res_day = 1;
-          res_month++;
-          if (res_month == 12 && days_after > 0) {
-            res_month=1;
+          if (res_month == 12) {
+            res_month = 1;
             res_year++;
             days[2] = isLeapYears(res_year) ? 29: 28;
+          } else {
+            res_month++;
           }
+          days_after--;
+        } else {
+          days_after -= days[res_month]-res_day;
+          res_day += days[res_month]-res_day;
         }
-        // Error aqui
-        res_day += days[month]-res_day;
-        days_after -= days[month]-res_day;
       }
     }
-    
-    /*for (int i = 0; i < days_after; i++) {
-      res_day++;
-      if (res_day > days[res_month]) {
-        res_day = 1;
-        res_month++;
-        if (res_month > 12) {
-          res_month=1;
-          res_year++;
-          days[2] = isLeapYears(res_year) ? 29: 28;
-        }
-      }
-    }*/
+
     printf("%d %d %d\n", res_day, res_month, res_year);
   }
   return 0;
