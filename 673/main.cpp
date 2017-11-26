@@ -1,6 +1,7 @@
-#include <cstdio>
-#include <cstring>
+#include <stdio.h>
+#include <string>
 #include <stack>
+#include <iostream>
 
 using namespace std;
 
@@ -18,12 +19,11 @@ int main() {
   int n;
   scanf("%d\n", &n);
   while (n--) {
-    char parentheses[128];
+    string parentheses;
     stack<char> remid;
-    gets(parentheses);
+    getline(cin, parentheses);
     bool condition = true;
-    int size = strlen(parentheses);
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < parentheses.length(); i++) {
       if (opens(parentheses[i])) {
         remid.push(parentheses[i]);
       }
