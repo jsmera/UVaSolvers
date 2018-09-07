@@ -17,7 +17,7 @@ struct User{
   }
 };
 
-bool comp(User& a, User& b) {
+bool comp(const User& a, const User& b) {
   if (a.id == 0)
     return false;
   if (b.id == 0)
@@ -31,29 +31,31 @@ bool comp(User& a, User& b) {
   return false;
 }
 
+User users[102];
+
 int main() {
   int T;
-  User users[103];
   cin >> T;
   stringstream ss;
   string line;
-  getline(cin, line), getline(cin, line);
+  getline(cin, line);
+  getline(cin, line);
   while(T--) {
     int ID, P, time;
     char L;
     int last = 0;
     while (getline(cin, line)) {
-      if ( line.empty() ) break;
       ss.clear();
+      if ( line.empty() ) break;
       ss << line;
       ss >> ID >> P >> time >> L;
 
-      if ( !users[ID].id ) users[ID].id = ID;
+      if (users[ID].id <= 0 || users[ID].id > 100) users[ID].id = ID;
       if (L == 'C') {
         users[ID].time_penality += time;
-        // users[ID].problems_solved += 1;
+        users[ID].problems_solved += 1;
       }
-      else if(L == 'I') {
+      if(L == 'I') {
         users[ID].time_penality += 20;
       }
 
@@ -61,14 +63,15 @@ int main() {
     }
 
     sort(users+1, users+last+1, comp);
-    
+
     for (int i = 1; i <= last; i++) {
-      if ( users[i].id ) {
-        cout << users[i].id << " " << users[i].problems_solved << " " << users[i].time_penality << endl;
-        users[i].id = 0;
+      cout << users[i].id << " " << users[i].problems_solved << " " << users[i].time_penality << endl;
+      // cout << users[i].id << " " << users[i].problems_solved << " " << users[i].time_penality << endl;
+      /*if ( users[i].id ) {
+        /*users[i].id = 0;
         users[i].problems_solved = 0;
         users[i].time_penality = 0;
-      }
+      }*/
     }
     if (T) cout << endl;
   }
