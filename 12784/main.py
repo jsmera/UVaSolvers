@@ -24,7 +24,7 @@ def DFS(u):
       else:
         temp = temp if child == temp else INF
     else:
-      # Si ya fue visitaso pero necesito saber su
+      # Si ya fue visitado pero necesito saber su
       # alcance
       if fist:
         temp = final[v]
