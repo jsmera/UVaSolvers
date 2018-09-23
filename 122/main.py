@@ -35,7 +35,6 @@ def main():
     stack, aux = deque([tree]), deque()
     while condition and len(stack):
       u = stack.popleft()
-      # print(u.value)
       aux.append(u.value)
       if u.left != None or u.right != None:
         if u.value == -1:
