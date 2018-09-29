@@ -2,48 +2,42 @@
 #include <cmath>
 
 using namespace std;
-double H[4294967296];
-unsigned int last;
 
-void armonic(unsigned int* n) {
-  if (last < *n) {
-    for (unsigned int i = last; i <= *n; i++) {
-      H[i] = H[i-1] + 1/(double)i;
-    }
-    last = *n;
-  }
-};
+unsigned long long Ha(unsigned long long n){
+  unsigned long long res = 0;
+  unsigned long long tmp = 0;
+  unsigned long long i;
 
-long long Ha(int n){
-  long long res = 0;
-  for( int i = 1; i <= sqrt(n); i=i+1 ){
-    res = (res + n/i);
-  }
-  return res;
-}
+  unsigned long long  r = (unsigned long long)floor(sqrt(n));
 
-long long Hai(int n){
-  long long res = 0;
-  for( int i = 1; i <= n; i=i+1 ){
-    res = (res + n/i);
+  if (r*r == n) {
+    res += n/r;
+    r -= 1;
   }
+
+  for(i = 1; i <= r; i=i+1 ){
+    res += n/i;
+    res += max(n/i-r, (unsigned long long) 0);
+    // if (i > 1)
+      // res += (tmp - n/i)*(i-1);
+    // tmp = n/i;
+  }
+  // res += (tmp - n/(i))*(i-1);
   return res;
 }
 
 int main() {
-  H[0] = 0;
-  last = 1;
   int T;
   cin >> T;
   while (T--) {
-    unsigned int n;
+    unsigned long long n;
     cin >> n;
-    long long ha = Ha(n), hai = Hai(n);
-    // armonic(&n);
-    cout << "n: "<< n << " " << hai 
-    << " " << ha << " " << hai-ha << endl;
-    cout << endl;
+    if (n != 0) {
+      unsigned long long ha = Ha(n);
+      cout << ha <<endl;
+    } else {
+      cout << 0 << endl;
+    }
   }
-
   return 0;
 }

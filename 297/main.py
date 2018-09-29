@@ -1,5 +1,6 @@
 from sys import stdin
 from collections import deque
+from math import ceil
 
 class Quadtree(object):
   def __init__(self, tag):
@@ -29,7 +30,6 @@ def main():
 
     a, _ = build(data_one, 0)
     b, _ = build(data_two, 0)
-
     ans = 0
     deque_for_a, deque_for_b = deque([(a, 1)]), deque([(b, 1)])
     while len(deque_for_a) or len(deque_for_b):
@@ -42,7 +42,7 @@ def main():
 
       if node_b.tag == 'f' or node_a.tag == 'f':
         if lvl > 6:
-          ans += 1
+          ans += 4**(8-lvl)
         else:
           ans += 4**(6-lvl)
       else:
